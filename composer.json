@@ -1,0 +1,21 @@
+{
+    "name": "psilva/jagger",
+    "description": "REST model/controllers/services for common webadmin tasks",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pablo Silva",
+            "email": "elgodolfredo@gmail.com"
+        }
+    ],
+    "require": {
+        "psilva/framework" : "*",
+        "illuminate/database" : "5.3.4"
+    },
+    "autoload" : {
+        "psr-4" : {"Jagger\\" : "src/"}
+    }
+    
+
+}
