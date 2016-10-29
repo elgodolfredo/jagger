@@ -10,32 +10,35 @@
 			array('GET', 'logout'),
 			array('POST', 'authenticate'),
 		);
+		protected $redirectLogin = 'login';
+		protected $redirectAdmin = 'admin';
+		protected $templateLogin = 'login.html';
 
 		public function login($action)
 		{
-			$this->render('login.html');
+			$this->render($this->templateLogin);
 		}
 
 		public function authenticate($action)
 		{
-			$loginService = new \Service\LoginService();
+			$loginService = new \Jagger\Service\LoginService();
 			$values = $action->getInput();
 			try 
 			{
 				$loginService->login($values['username'], $values['password']);
-				$this->redirect('admin');
+				$this->redirect($this->redirectAdmin);
 			} 
 			catch (\Exception $e)
 			{
-				$this->redirect('login');
+				$this->redirect($this->redirectLogin);
 			}
 		}
 
 		public function logout($action)
 		{
-			$loginService = new \Service\LoginService();
+			$loginService = new \Jagger\Service\LoginService();
 			$loginService->logout();
-			$this->redirect('login');
+			$this->redirect($this->redirectLogin);
 		}
 
 	}

@@ -2,12 +2,12 @@
 	
 	namespace Jagger\Service;
 
-	class LoginService extends Service
+	class LoginService extends \Jagger\Service\Service
 	{
 
 		public function login($username, $password)
 		{
-			$user = \Model\User::where(array('username' => $username, 'password' => $password))->first();
+			$user = \Jagger\Model\User::where(array('username' => $username, 'password' => $password))->first();
 			if ( !$user )
 			{
 				throw new \Exception("Usuario o contraseña incorrecta", 1);

@@ -7,7 +7,7 @@
 		
 		public function handle($input)
 		{
-			$loginService = new \Service\LoginService();
+			$loginService = new \Jagger\Service\LoginService();
 
 			if ( !$loginService->isLogged() )
 			{

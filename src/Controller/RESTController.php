@@ -5,7 +5,7 @@
 	class RESTController extends \Framework\Controller
 	{
 
-		protected $middlewares = array(array('Middleware\AuthenticateMiddleware'));
+		protected $middlewares = array(array('\Jagger\Middleware\AuthenticateMiddleware'));
 		protected $modelName = 'model';
 		//redirects
 		protected $redirectStore  = '';
