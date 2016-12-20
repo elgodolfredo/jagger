@@ -6,7 +6,7 @@
 	{
 
 		protected $routes = array(
-			array('GET', 'admin', ''),
+			array('GET', 'admin'),
 			array('GET', 'panel')
 		);
 		protected $middlewares   = array(array('\Jagger\Middleware\AuthenticateMiddleware'));
