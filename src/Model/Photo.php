@@ -13,14 +13,14 @@
         public function uploadFile($file)
         {
             $filename = $file['name'];
-            $newFilename = $this->getRandomFilename();
             $originalQualityDir = $this->getOriginalQualityDir();
-            $newFilename = $this->getRandomFilename($file);
+            $newFilename = $this->getRandomFilename($file['name']);
             $originalQualityFilepath = "$originalQualityDir/$newFilename";
-            $this->moveFile($originalQualityFilepath);
+            $this->moveFile($file['tmp_name'], $originalQualityFilepath);
             $lowQualityDir = $this->getLowQualityDir();
             $lowQualityFilepath = "$lowQualityDir/$newFilename";
             $this->createLowQualityPhoto($originalQualityFilepath, $lowQualityFilepath);
+            $this->file = $originalQualityFilepath;
         }
 
         public function createLowQualityPhoto($filepath, $lowQualityFilepath)
@@ -33,7 +33,7 @@
             elseif ($info['mime'] == 'image/png') 
                 $image = imagecreatefrompng($filepath);
             $quality = 70;
-            imagejpeg($image, $_SERVER['DOCUMENT_ROOT'].$lowQualityFilepath, $quality);
+            imagejpeg($image, $lowQualityFilepath, $quality);
         }
 
         public function getUrlSrc()
@@ -41,7 +41,7 @@
             return $this->file;
         }
 
-        public function getRandomFilename($file);
+        public function getRandomFilename($file)
         {
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             return uniqid() . "." . $ext;
@@ -49,12 +49,12 @@
 
         public function getOriginalQualityDir()
         {
-
+            return 'images/original';
         }
 
         public function getLowQualityDir()
         {
-
+            return 'images/low';
         }
 
         public function moveFile($filename, $destination)
