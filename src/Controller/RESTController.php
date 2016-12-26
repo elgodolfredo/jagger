@@ -10,6 +10,8 @@
 		//redirects
 		protected $redirectStore  = '';
 		protected $redirectUpdate = '';
+		protected $messageStore   = 'Se ha creado correctamente';
+        protected $messageUpdate  = 'Se ha actualizado correctamente';
 
 		public function show($action)
 		{
@@ -26,6 +28,10 @@
 		public function store($action)
 		{
 			$this->service->save($action->getInput());
+			if ( $this->messageStore ) 
+			{
+				$this->setFlashMessage('bg-success', $this->messageStore);
+			}
 			$this->redirect($this->redirectStore);
 		}
 
@@ -40,6 +46,10 @@
 		{
 			$params = $action->getParams();
 			$this->service->update($params['id'], $action->getInput());
+			if ( $this->messageUpdate ) 
+			{
+				$this->setFlashMessage('bg-success', $this->messageUpdate);
+			}
 			$this->redirect($this->redirectUpdate);
 		}
 
