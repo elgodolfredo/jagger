@@ -12,7 +12,13 @@
 			{
 				throw new \Exception("Usuario o contraseña incorrecta", 1);
 			}
-			$_SESSION['user'] = array('username' => $user->username, 'id' => $user->id);
+			$_SESSION['user'] = array(
+				'username'   => $user->username, 
+				'id'         => $user->id, 
+				'first_name' => $user->first_name, 
+				'last_name'  => $user->last_name, 
+				'fullname'   => trim($user->first_name . " " . $user->last_name),
+			);
 		}
 		
 		public function loginAdmin($password, $username='admin')
