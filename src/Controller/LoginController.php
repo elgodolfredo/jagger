@@ -16,7 +16,14 @@
 
 		public function login($action)
 		{
-			$this->render($this->templateLogin);
+			$loginService = new \Jagger\Service\LoginService();
+			if ( $loginService->isLogged() )
+			{
+				$this->redirect($this->redirectAdmin);
+			} else 
+			{
+				$this->render($this->templateLogin);
+			}
 		}
 
 		public function authenticate($action)
@@ -44,3 +51,4 @@
 	}
 
 ?>
+
